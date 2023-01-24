@@ -6,23 +6,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.College;
-import com.example.demo.service.CollegeService;
+import com.example.demo.model.Student;
+import com.example.demo.service.StudentService;
 
 @RestController
-@RequestMapping("/college")
-public class CollegeController {
-
+@RequestMapping("/student")
+public class StudentController {
 	@Autowired
-	private CollegeService collegeService;
+	private StudentService studentService;
 	
 	
-	@PostMapping("/insertCollege")
-	public College addCollegeDetails(@RequestBody College collegeObject) {
+	@PostMapping("/insertStudent")
+	public Student addStudentDetails(@RequestBody Student studentObject) {
 		
 		
-		return collegeService.addCollegeDetails(collegeObject);
+		return studentService.addStudentDetails(studentObject);
 	}
-	
-	
 }

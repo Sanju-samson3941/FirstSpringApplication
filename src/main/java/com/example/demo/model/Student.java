@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -20,7 +22,9 @@ public class Student {
 	
 	private String studentRegistrationNumber;
 	
+	private List<String> sportsEnroled;
+	
 	private String fatherName;
 	
-	private Integer fatherPhone;
+	private Long fatherPhone;
 }
