@@ -1,12 +1,16 @@
 package com.example.demo.service;
 
+import java.util.List;
 import java.util.OptionalLong;
+
+import javax.management.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.College;
+import com.jayway.jsonpath.Criteria;
 
 @Service
 public class CollegeService {
@@ -28,5 +32,14 @@ public class CollegeService {
 		
 		return mongoTemplate.save(collegeDetails, "college");
 	}
+	public List<College> getCollegeDetails(){
+		return mongoTemplate.findAll(College.class);
+		
+	}
+	public College getCollegeDetailById(Long collegeId) {
+		return mongoTemplate.findById(collegeId, College.class, "college");
+		
+	}
+	
 	
 }

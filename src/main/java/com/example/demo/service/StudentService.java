@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.List;
 import java.util.OptionalLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,11 @@ public class StudentService {
 		}
 		
 		return mongoTemplate.save(studentDetails, "student");
+	}
+	public List<Student> getStudentDetails(){
+		return mongoTemplate.findAll(Student.class);
+	}
+	public Student getStudentDetailById(Long studentId) {
+		return mongoTemplate.findById(studentId, Student.class, "student");
 	}
 }
