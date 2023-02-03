@@ -2,15 +2,13 @@ package com.example.demo.service;
 
 import java.util.List;
 import java.util.OptionalLong;
-
-import javax.management.Query;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.College;
-import com.jayway.jsonpath.Criteria;
 
 @Service
 public class CollegeService {
@@ -40,6 +38,25 @@ public class CollegeService {
 		return mongoTemplate.findById(collegeId, College.class, "college");
 		
 	}
+	public List<College> getCollegeDetailsByCollegeRating(Integer collegeRating){
+		Query query = new Query();
+		query.addCriteria(Criteria.where("collegeRating").is(collegeRating));
+		return mongoTemplate.find(query, College.class);
+		
+	}
+	public College updateCollegeDetails(Long _id, College college) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").is(_id));
+		college.setCollegeId(_id);
+		return mongoTemplate.save(college);
+		
+	}
+	public College deleteCollegeDetails(Long collegeId) {
+		Query query= new Query();
+		query.addCriteria(Criteria.where("collegeId").is(collegeId));
+		return mongoTemplate.findAndRemove(query, College.class, "college");
+	}
+	
 	
 	
 }

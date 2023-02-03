@@ -5,6 +5,8 @@ import java.util.OptionalLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Teacher;
@@ -32,6 +34,18 @@ public class TeacherService {
 	}
 	public Teacher getTeacherDetailById(Long teacherId) {
 		return mongoTemplate.findById(teacherId, Teacher.class, "teacher");
+	}
+	public Teacher updateTeacherDetails(Long teacherId, Teacher teacher) {
+		Query query=new Query();
+		query.addCriteria(Criteria.where("teacherId").is(teacherId));
+		teacher.setTeacherId(teacherId);
+		return mongoTemplate.save(teacher);
+	}
+	public Teacher deleteTeahcerDetails(Long teacherId) {
+		Query query= new Query();
+		query.addCriteria(Criteria.where("teacherId").is(teacherId));
+		
+		return mongoTemplate.findAndRemove(query,Teacher.class, "teacher");
 	}
 	
 }
